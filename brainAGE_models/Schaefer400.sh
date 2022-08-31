@@ -5,7 +5,7 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 ################################################################################
 ### first visit and download annotation files at https://github.com/ThomasYeoLab/CBIG/tree/master/stable_projects/brain_parcellation/Schaefer2018_LocalGlobal/Parcellations/FreeSurfer5.3/fsaverage/label ###
-### copy the downloaded annotations files to your FreeSurfer folder ($FREESURFER_HOME/subjects/fsaverage/label) #############################################################################################################################################################################################################
+### copy the downloaded annotations files to your FreeSurfer folder ($FREESURFER_HOME/subjects/fsaverage/label) #############################################################################################
 export SUBJECTS_DIR=/scratch/ryg/01_FS
 for sub in `ls $SUBJECTS_DIR`
 do  
