@@ -1,12 +1,11 @@
 ################## please change the folder names to your own ##################
 export FREESURFER_HOME=/arc/home/ryg/software/freesurfer
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
-
+export SUBJECTS_DIR=/scratch/ryg/01_FS
 
 ################################################################################
 ### first visit and download annotation files at https://github.com/ThomasYeoLab/CBIG/tree/master/stable_projects/brain_parcellation/Schaefer2018_LocalGlobal/Parcellations/FreeSurfer5.3/fsaverage/label ###
 ### copy the downloaded annotations files to your FreeSurfer folder ($FREESURFER_HOME/subjects/fsaverage/label) #############################################################################################
-export SUBJECTS_DIR=/scratch/ryg/01_FS
 for sub in `ls $SUBJECTS_DIR`
 do  
 
@@ -30,5 +29,7 @@ done
 
 
 ################################################################################
-aparcstats2table --hemi lh --subjects *sub0* --parc Schaefer400 --meas area --tablefile lh.Schaefer400.txt
-aparcstats2table --hemi rh --subjects *sub0* --parc Schaefer400 --meas area --tablefile rh.Schaefer400.txt
+aparcstats2table --hemi lh --subjects *sub0* --parc Schaefer400 --meas area --tablefile lh.Schaefer400_area.txt
+aparcstats2table --hemi rh --subjects *sub0* --parc Schaefer400 --meas area --tablefile rh.Schaefer400_area.txt
+aparcstats2table --hemi lh --subjects *sub0* --parc Schaefer400 --meas thickness --tablefile lh.Schaefer400_thickness.txt
+aparcstats2table --hemi rh --subjects *sub0* --parc Schaefer400 --meas thickness --tablefile rh.Schaefer400_thickness.txt
