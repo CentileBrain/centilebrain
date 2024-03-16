@@ -3,7 +3,8 @@
 
 # In[1]:
 
-# preferable version of the neuroHarmonize, pandas, and numpy packages are 2.1.1, 2.2.1, and 1.26.4  
+# For optimal reproducibility, it is recommended to use specific versions of the neuroHarmonize, pandas, and numpy packages: 
+# 2.1.0 for neuroHarmonize, 2.2.1 for pandas, and 1.26.4 for numpy
 from neuroHarmonize import harmonizationLearn 
 import pandas as pd
 import numpy as np
