@@ -1,0 +1,32 @@
+################################################################################
+export FREESURFER_HOME=/arc/project/software/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+
+################################################################################
+export SUBJECTS_DIR=/scratch/data/FreeSurfer_results
+
+##Schaefer400
+for sub in `ls $SUBJECTS_DIR`
+do  
+  mri_surf2surf --hemi lh \
+    --srcsubject fsaverage \
+    --trgsubject $sub \
+    --sval-annot $FREESURFER_HOME/subjects/fsaverage/label/lh.Schaefer2018_400Parcels_7Networks_order.annot \
+    --tval $SUBJECTS_DIR/$sub/label/lh.Schaefer2018_400Parcels_7Networks_order.annot
+
+  mri_surf2surf --hemi rh \
+    --srcsubject fsaverage \
+    --trgsubject $sub \
+    --sval-annot $FREESURFER_HOME/subjects/fsaverage/label/rh.Schaefer2018_400Parcels_7Networks_order.annot \
+    --tval $SUBJECTS_DIR/$sub/label/rh.Schaefer2018_400Parcels_7Networks_order.annot
+
+  cd $SUBJECTS_DIR/$sub/
+  mris_anatomical_stats -a $SUBJECTS_DIR/$sub/label/lh.Schaefer2018_400Parcels_7Networks_order.annot -b -f $SUBJECTS_DIR/$sub/stats/lh.Schaefer400.stats $sub lh
+  mris_anatomical_stats -a $SUBJECTS_DIR/$sub/label/rh.Schaefer2018_400Parcels_7Networks_order.annot -b -f $SUBJECTS_DIR/$sub/stats/rh.Schaefer400.stats $sub rh
+done
+
+cd $SUBJECTS_DIR
+aparcstats2table --hemi lh --subjects subj* --parc Schaefer400 --meas area --tablefile lh.Schaefer400.area.txt
+aparcstats2table --hemi rh --subjects subj* --parc Schaefer400 --meas area --tablefile rh.Schaefer400.area.txt
+aparcstats2table --hemi lh --subjects subj* --parc Schaefer400 --meas thickness --tablefile lh.Schaefer400.thickness.txt
+aparcstats2table --hemi rh --subjects subj* --parc Schaefer400 --meas thickness --tablefile rh.Schaefer400.thickness.txt
