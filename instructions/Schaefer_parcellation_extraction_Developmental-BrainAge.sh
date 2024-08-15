@@ -5,7 +5,7 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 ################################################################################
 export SUBJECTS_DIR=/scratch/data/FreeSurfer_results
 
-##Schaefer400
+##Schaefer1000 atlas
 for sub in `ls $SUBJECTS_DIR`
 do  
   mri_surf2surf --hemi lh \
