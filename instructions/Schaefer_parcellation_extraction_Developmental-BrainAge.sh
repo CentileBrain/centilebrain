@@ -5,7 +5,7 @@ source $FREESURFER_HOME/SetUpFreeSurfer.sh
 ################################################################################
 export SUBJECTS_DIR=/scratch/data/FreeSurfer_results
 
-##Schaefer1000 atlas
+##Schaefer1000 atlas can be downloaded here https://github.com/ThomasYeoLab/CBIG/tree/master/stable_projects/brain_parcellation/Schaefer2018_LocalGlobal/Parcellations/FreeSurfer5.3/fsaverage/label
 for sub in `ls $SUBJECTS_DIR`
 do  
   mri_surf2surf --hemi lh \
