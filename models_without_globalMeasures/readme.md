@@ -22,3 +22,93 @@ Load the "reticulate" package to R environment.
 library(reticulate)
 ```
 
+
+### 2. Data Preparation
+
+#### 2.1 Importing the users' data
+
+The demonstration [**data (demo_subcorticalVolume_male.csv)**](https://github.com/CentileBrain/centilebrain/blob/main/models_without_globalMeasures/demo_subcorticalVolume_male.csv) comprises simulated multisite FreeSurfer-derived 14 regional subcortical volume measures.
+```{r}
+data_original <- read.csv(".../demo_subcorticalVolume_male.csv")
+```
+
+#### 2.2 Site Harmonization of the demonstration data
+
+Download and read the [**Python script of ComBat-GAM**](https://github.com/CentileBrain/centilebrain/blob/3ffe05cfd2b52591662c8648a2079c363f079f32/models/combatGAM_Python4R.py) within the R environment.
+```{r message=FALSE, warning=FALSE, results=FALSE}
+source_python("I:/CentileBrain/scripts//combatGAM_Python4R.py")
+```
+Site harmonization of the demonstration data is implemented using [ComBat-GAM](https://github.com/rpomponio/neuroHarmonize) as follows:
+```{r message=FALSE, warning=FALSE, results=FALSE}
+covars_temp = data[,c("SITE","age")]
+data_temp = data_original[,c(4:17)]
+write.csv(covars_temp[,1:2],".../covars_temp.csv", row.names = FALSE)
+write.csv(data_temp,".../data_temp.csv", row.names = FALSE)
+adjustedData_model <- combatGAM_R_new(".../")
+data_harmonized <- data.frame(adjustedData_model[[1]])
+
+data = data.frame(matrix(0, nrow = nrow(data_original), ncol = ncol(data_original)))
+data[,c(1,2)] = covars_temp
+data[,c(3:16)] = data_harmonized
+names(data) <- colnames(data_original)
+```
+
+### 3. Application of CentileBrain model parameters to the demonstration data
+
+#### 3.1 Loading the CentileBrain model parameters
+
+The script below loads the parameters for female subcortical volumes.
+```{r}
+CentileBrain_mfpModel_list <- readRDS(".../MFPmodels_subcorticalvolume_male.rds")
+for (i in 1:14){
+  a = CentileBrain_mfpModel_list[[i]]
+  attr(a$terms, ".Environment") <- globalenv()
+  attr(a$fit$terms, ".Environment") <- globalenv()
+  CentileBrain_mfpModel_list[[i]] = a
+}
+```
+
+#### 3.2 Application of the CentileBrain model parameters
+
+The script below applies the CentileBrain model parameters to the demo data, and return the results.
+```{r}
+prediction_list <- NULL
+z_score_list <- NULL
+mae_list <- matrix(nrow = 1, ncol = 14)
+rmse_list <- matrix(nrow = 1, ncol = 14)
+ev_list <- matrix(nrow = 1, ncol = 14)
+corr_list <- matrix(nrow = 1, ncol = 14)
+MSLL_list <- matrix(nrow = 1, ncol = 14)
+newdat <- data_centered[,2:3]
+for (region in 3:ncol(data)){
+  newdat[,2] =  newdat[,2] ###########################
+  predicted <- predict(CentileBrain_mfpModel_list[[region-2]],newdata = newdat)
+  prediction_list[region-2] <- data.frame(predicted)
+  z_score <- (data_centered[region]-predicted)/sqrt(sum(CentileBrain_mfpModel_list[[region-2]]$residuals**2)/length(CentileBrain_mfpModel_list[[region-2]]$residuals))
+  z_score_list[region-2] <- z_score
+  mae_list[1,region-2] <- sum(abs(data_centered[region]-predicted))/nrow(data_centered)
+  rmse_list[1,region-2] <- sqrt(1/(nrow(data_centered))*sum((data_centered[region]-predicted)**2))
+  corr_list[1,region-3] <- cor(data_centered[region],predicted)
+  ev_list[1,region-2] <- 1-var(data_centered[region]-predicted)/var(data_centered[region])
+  newdat <- data_centered[,2:3]
+}
+```
+
+Save the results.
+```{r}
+names(prediction_list) = names(data[,3:ncol(data)])
+names(z_score_list) = names(data[,3:ncol(data)])
+write.csv(prediction_list,".../prediction_subcorticalvolume_male.csv",row.names=FALSE)
+write.csv(z_score_list,".../z-score_subcorticalvolume_male.csv",row.names=FALSE)
+write.csv(mae_list,".../mae_list.csv",row.names=FALSE)
+write.csv(rmse_list,".../rmse_list.csv",row.names=FALSE)
+write.csv(corr_list,".../corr_list.csv",row.names=FALSE)
+write.csv(ev_list,".../ev_list.csv",row.names=FALSE)
+write.csv(MSLL_list,".../MSLL_list.csv",row.names=FALSE)
+```
+
+
+\
+\
+
+
