@@ -61,7 +61,7 @@ names(data) <- colnames(data_original)
 The script below loads the parameters for subcortical volumes of males. The models are provided in .rds format, and can be found [**here**](https://github.com/CentileBrain/centilebrain/tree/main/models_without_globalMeasures/models).
 ```{r}
 CentileBrain_mfpModel_list <- readRDS(".../MFPmodels_subcorticalvolume_male.rds")
-for (i in 1:14){
+for (i in 1:14){  # change '1:14' to '1:68' for cortical thickness and cortical surface area measures
   a = CentileBrain_mfpModel_list[[i]]
   attr(a$terms, ".Environment") <- globalenv()
   attr(a$fit$terms, ".Environment") <- globalenv()
