@@ -27,12 +27,12 @@ library(reticulate)
 
 #### 2.1 Importing the users' data
 
-The demonstration data [**(demo_subcorticalVolume_male.csv)**](https://github.com/CentileBrain/centilebrain/blob/main/models_without_globalMeasures/demo_subcorticalVolume_male.csv) comprises simulated multisite FreeSurfer-derived 14 regional subcortical volume measures.
+Download template [**(template_cortical-thickness-male.csv)**]([https://github.com/CentileBrain/centilebrain/blob/main/models_without_globalMeasures/template_subcortical-volume-male.csv]) and populate this template with your own data. The CentileBrain models will not function if there are missing data on the input spreadsheet. Users can either remove study participants with missing data or impute the missing data. 
 ```{r}
-data_original <- read.csv(".../demo_subcorticalVolume_male.csv")
+data_original <- read.csv(".../template_cortical-thickness-male.csv")
 ```
 
-#### 2.2 Site Harmonization of the demonstration data
+#### 2.2 Site Harmonization of the users' data
 
 Download and read the [**Python script of ComBat-GAM**](https://github.com/CentileBrain/centilebrain/blob/3ffe05cfd2b52591662c8648a2079c363f079f32/models/combatGAM_Python4R.py) within the R environment.
 ```{r message=FALSE, warning=FALSE, results=FALSE}
@@ -41,7 +41,7 @@ source_python("I:/CentileBrain/scripts//combatGAM_Python4R.py")
 Site harmonization of the demonstration data is implemented using [ComBat-GAM](https://github.com/rpomponio/neuroHarmonize) as follows:
 ```{r message=FALSE, warning=FALSE, results=FALSE}
 covars_temp = data[,c("SITE","age")]
-data_temp = data_original[,c(4:17)]
+data_temp = data_original[,c(3:16)] # change 3:16 to 3:70 for cortical thickness and cortical surface area measures
 write.csv(covars_temp[,1:2],".../covars_temp.csv", row.names = FALSE)
 write.csv(data_temp,".../data_temp.csv", row.names = FALSE)
 adjustedData_model <- combatGAM_R_new(".../")
@@ -49,7 +49,7 @@ data_harmonized <- data.frame(adjustedData_model[[1]])
 
 data = data.frame(matrix(0, nrow = nrow(data_original), ncol = ncol(data_original)))
 data[,c(1,2)] = covars_temp
-data[,c(3:16)] = data_harmonized
+data[,c(3:16)] = data_harmonized # change 3:16 to 3:70 for cortical thickness and cortical surface area measures
 names(data) <- colnames(data_original)
 ```
 
@@ -74,7 +74,7 @@ The script below applies the CentileBrain model parameters to the demo data, and
 ```{r}
 prediction_list <- NULL
 z_score_list <- NULL
-mae_list <- matrix(nrow = 1, ncol = 14)
+mae_list <- matrix(nrow = 1, ncol = 14) # change ncol = 14 to ncol = 68 for cortical thickness and cortical surface area measures
 rmse_list <- matrix(nrow = 1, ncol = 14)
 ev_list <- matrix(nrow = 1, ncol = 14)
 corr_list <- matrix(nrow = 1, ncol = 14)
