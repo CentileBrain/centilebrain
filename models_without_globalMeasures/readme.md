@@ -57,7 +57,7 @@ names(data) <- colnames(data_original)
 
 #### 3.1 Loading the pre-trained CentileBrain model (note this version of the model is excluding the global measures as covariates) 
 
-The script below loads the parameters for female subcortical volumes.
+The script below loads the parameters for subcortical volumes of males. The models can be found [here]([https://github.com/CentileBrain/centilebrain/tree/main/models_without_globalMeasures])
 ```{r}
 CentileBrain_mfpModel_list <- readRDS(".../MFPmodels_subcorticalvolume_male.rds")
 for (i in 1:14){
