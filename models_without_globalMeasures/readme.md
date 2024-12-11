@@ -1,1 +1,1 @@
-# CentileBrain models without adding the global measures as covariates
+# CentileBrain Models Excluding Global Measures as Covariates
