@@ -28,7 +28,7 @@ library(reticulate)
 
 #### 2.1 Importing the Users' Data
 
-Download template [**(template_cortical-thickness-male.csv)**]([https://github.com/CentileBrain/centilebrain/blob/main/models_without_globalMeasures/template_subcortical-volume-male.csv]) and populate this template with your own data. The CentileBrain models will not function if there are missing data on the input spreadsheet. Users can either remove study participants with missing data or impute the missing data. 
+Download template [**(template_cortical-thickness-male.csv)**](https://github.com/CentileBrain/centilebrain/blob/main/models_without_globalMeasures/templates/template_subcortical-volume-male.csv) and populate this template with your own data. The CentileBrain models will not function if there are missing data on the input spreadsheet. Users can either remove study participants with missing data or impute the missing data. 
 ```{r}
 data_original <- read.csv(".../template_cortical-thickness-male.csv")
 ```
