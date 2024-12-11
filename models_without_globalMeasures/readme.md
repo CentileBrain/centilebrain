@@ -1,9 +1,9 @@
 # Use of CentileBrain Models Excluding Global Measures as Covariates
 The CentileBrain Models were developed using brain morphometric data from multiple cohorts shown in the [Data Vault](https://centilebrain.org/#/explore). [**These models**](https://github.com/CentileBrain/centilebrain/tree/main/models) provide parameters for generating normative deviation measures for subcortical volumes, cortical thickness, and cortical surface area, separately for males and females, from any dataset.
 
-Researchers wishing to apply the CentileModel parameters we provide to generate normative deviation measures for their own datasets should go to [Generate Normative Deviation Values for Your Data](https://centilebrain.org/#/model).
+Researchers wishing to apply the optimised CentileModel parameters we provide to generate normative deviation measures for their own datasets should go to [Generate Normative Deviation Values for Your Data](https://centilebrain.org/#/model).
 
-Below we provide a demonstration of the CentileBrain Models by applying the model parameters to a multi-site dataset of subcortical volumes from males. The script applies to other morphometric measures of males and females. 
+Below we provide a demonstration of the CentileBrain Models (excluding global measures as covariates) by applying the model parameters to a multi-site dataset of subcortical volumes from males. The following script applies to other morphometric measures of males and females. 
 
 ### 1. Environment Setup
 
