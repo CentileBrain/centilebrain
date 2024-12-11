@@ -1,4 +1,4 @@
-# Use of CentileBrain Models Excluding Global Measures as Covariates
+# Application of CentileBrain Models (Excluding Global Measures as Covariates)
 The CentileBrain Models were developed using brain morphometric data from multiple cohorts shown in the [Data Vault](https://centilebrain.org/#/explore). [**These models**](https://github.com/CentileBrain/centilebrain/tree/main/models) provide parameters for generating normative deviation measures for subcortical volumes, cortical thickness, and cortical surface area, separately for males and females, from any dataset.
 
 Below we provide a demonstration of the CentileBrain Models (of the version excluding global measures as covariates) by applying the model parameters to a multi-site dataset of subcortical volumes from males. The following script can also be applied to other morphometric measures for both males and females.
@@ -25,14 +25,14 @@ library(reticulate)
 
 ### 2. Data Preparation
 
-#### 2.1 Importing the users' data
+#### 2.1 Importing the Users' Data
 
 Download template [**(template_cortical-thickness-male.csv)**]([https://github.com/CentileBrain/centilebrain/blob/main/models_without_globalMeasures/template_subcortical-volume-male.csv]) and populate this template with your own data. The CentileBrain models will not function if there are missing data on the input spreadsheet. Users can either remove study participants with missing data or impute the missing data. 
 ```{r}
 data_original <- read.csv(".../template_cortical-thickness-male.csv")
 ```
 
-#### 2.2 Site Harmonization of the users' data
+#### 2.2 Site Harmonization of the Users' Data
 
 Download and read the [**Python script of ComBat-GAM**](https://github.com/CentileBrain/centilebrain/blob/3ffe05cfd2b52591662c8648a2079c363f079f32/models/combatGAM_Python4R.py) within the R environment.
 ```{r message=FALSE, warning=FALSE, results=FALSE}
@@ -53,7 +53,7 @@ data[,c(3:16)] = data_harmonized # change 3:16 to 3:70 for cortical thickness an
 names(data) <- colnames(data_original)
 ```
 
-### 3. Application of CentileBrain model parameters to the demonstration data
+### 3. Application of CentileBrain Model Parameters to the Users' Data
 
 #### 3.1 Loading the pre-trained CentileBrain model (note this version of the model is excluding the global measures as covariates) 
 
@@ -109,6 +109,6 @@ write.csv(MSLL_list,".../MSLL_list.csv",row.names=FALSE)
 
 
 \
-\
+
 
 
