@@ -100,11 +100,10 @@ names(prediction_list) = names(data[,3:ncol(data)])
 names(z_score_list) = names(data[,3:ncol(data)])
 write.csv(prediction_list,".../prediction_subcorticalvolume_male.csv",row.names=FALSE)
 write.csv(z_score_list,".../z-score_subcorticalvolume_male.csv",row.names=FALSE)
-write.csv(mae_list,".../mae_list.csv",row.names=FALSE)
-write.csv(rmse_list,".../rmse_list.csv",row.names=FALSE)
-write.csv(corr_list,".../corr_list.csv",row.names=FALSE)
-write.csv(ev_list,".../ev_list.csv",row.names=FALSE)
-write.csv(MSLL_list,".../MSLL_list.csv",row.names=FALSE)
+write.csv(mae_list,".../mae_list_subcorticalvolume_male.csv",row.names=FALSE)
+write.csv(rmse_list,".../rmse_list_subcorticalvolume_male.csv",row.names=FALSE)
+write.csv(corr_list,".../corr_list_subcorticalvolume_male.csv",row.names=FALSE)
+write.csv(ev_list,".../ev_list_subcorticalvolume_male.csv",row.names=FALSE)
 ```
 
 
