@@ -80,18 +80,17 @@ rmse_list <- matrix(nrow = 1, ncol = 14)
 ev_list <- matrix(nrow = 1, ncol = 14)
 corr_list <- matrix(nrow = 1, ncol = 14)
 MSLL_list <- matrix(nrow = 1, ncol = 14)
-newdat <- data_centered[,2:3]
+newdat <- data.frame(data[,2])
+names(newdat) <- 'age'
 for (region in 3:ncol(data)){
-  newdat[,2] =  newdat[,2] ###########################
   predicted <- predict(CentileBrain_mfpModel_list[[region-2]],newdata = newdat)
   prediction_list[region-2] <- data.frame(predicted)
   z_score <- (data_centered[region]-predicted)/sqrt(sum(CentileBrain_mfpModel_list[[region-2]]$residuals**2)/length(CentileBrain_mfpModel_list[[region-2]]$residuals))
   z_score_list[region-2] <- z_score
   mae_list[1,region-2] <- sum(abs(data_centered[region]-predicted))/nrow(data_centered)
   rmse_list[1,region-2] <- sqrt(1/(nrow(data_centered))*sum((data_centered[region]-predicted)**2))
-  corr_list[1,region-3] <- cor(data_centered[region],predicted)
+  corr_list[1,region-2] <- cor(data_centered[region],predicted)
   ev_list[1,region-2] <- 1-var(data_centered[region]-predicted)/var(data_centered[region])
-  newdat <- data_centered[,2:3]
 }
 ```
 
