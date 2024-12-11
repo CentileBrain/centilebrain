@@ -42,7 +42,7 @@ source_python("I:/CentileBrain/scripts//combatGAM_Python4R.py")
 Site harmonization of the demonstration data is implemented using [ComBat-GAM](https://github.com/rpomponio/neuroHarmonize) as follows:
 ```{r message=FALSE, warning=FALSE, results=FALSE}
 covars_temp = data[,c("SITE","age")]
-data_temp = data_original[,c(3:16)] # change 3:16 to 3:70 for cortical thickness and cortical surface area measures
+data_temp = data_original[,c(3:16)] # change '3:16' to '3:70' for cortical thickness and cortical surface area measures
 write.csv(covars_temp[,1:2],".../covars_temp.csv", row.names = FALSE)
 write.csv(data_temp,".../data_temp.csv", row.names = FALSE)
 adjustedData_model <- combatGAM_R_new(".../")
@@ -50,7 +50,7 @@ data_harmonized <- data.frame(adjustedData_model[[1]])
 
 data = data.frame(matrix(0, nrow = nrow(data_original), ncol = ncol(data_original)))
 data[,c(1,2)] = covars_temp
-data[,c(3:16)] = data_harmonized # change 3:16 to 3:70 for cortical thickness and cortical surface area measures
+data[,c(3:16)] = data_harmonized # change '3:16' to '3:70' for cortical thickness and cortical surface area measures
 names(data) <- colnames(data_original)
 ```
 
@@ -75,7 +75,7 @@ The script below applies the CentileBrain model parameters to the demo data, and
 ```{r}
 prediction_list <- NULL
 z_score_list <- NULL
-mae_list <- matrix(nrow = 1, ncol = 14) # change ncol = 14 to ncol = 68 for cortical thickness and cortical surface area measures
+mae_list <- matrix(nrow = 1, ncol = 14) # change 'ncol = 14' to 'ncol = 68' for cortical thickness and cortical surface area measures
 rmse_list <- matrix(nrow = 1, ncol = 14)
 ev_list <- matrix(nrow = 1, ncol = 14)
 corr_list <- matrix(nrow = 1, ncol = 14)
