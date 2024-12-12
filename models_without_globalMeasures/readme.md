@@ -85,12 +85,12 @@ names(newdat) <- 'age'
 for (region in 3:ncol(data)){
   predicted <- predict(CentileBrain_mfpModel_list[[region-2]],newdata = newdat)
   prediction_list[region-2] <- data.frame(predicted)
-  z_score <- (data_centered[region]-predicted)/sqrt(sum(CentileBrain_mfpModel_list[[region-2]]$residuals**2)/length(CentileBrain_mfpModel_list[[region-2]]$residuals))
+  z_score <- (data[region]-predicted)/sqrt(sum(CentileBrain_mfpModel_list[[region-2]]$residuals**2)/length(CentileBrain_mfpModel_list[[region-2]]$residuals))
   z_score_list[region-2] <- z_score
-  mae_list[1,region-2] <- sum(abs(data_centered[region]-predicted))/nrow(data_centered)
-  rmse_list[1,region-2] <- sqrt(1/(nrow(data_centered))*sum((data_centered[region]-predicted)**2))
-  corr_list[1,region-2] <- cor(data_centered[region],predicted)
-  ev_list[1,region-2] <- 1-var(data_centered[region]-predicted)/var(data_centered[region])
+  mae_list[1,region-2] <- sum(abs(data[region]-predicted))/nrow(data)
+  rmse_list[1,region-2] <- sqrt(1/(nrow(data))*sum((data[region]-predicted)**2))
+  corr_list[1,region-2] <- cor(data[region],predicted)
+  ev_list[1,region-2] <- 1-var(data[region]-predicted)/var(data[region])
 }
 ```
 
