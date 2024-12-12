@@ -79,7 +79,6 @@ mae_list <- matrix(nrow = 1, ncol = 14) # change 'ncol = 14' to 'ncol = 68' for 
 rmse_list <- matrix(nrow = 1, ncol = 14)
 ev_list <- matrix(nrow = 1, ncol = 14)
 corr_list <- matrix(nrow = 1, ncol = 14)
-MSLL_list <- matrix(nrow = 1, ncol = 14)
 newdat <- data.frame(data[,2])
 names(newdat) <- 'age'
 for (region in 3:ncol(data)){
