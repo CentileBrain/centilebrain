@@ -93,7 +93,7 @@ for (region in 3:ncol(data)){
 }
 ```
 
-Save the results.
+Save the results:
 ```{r}
 names(prediction_list) = names(data[,3:ncol(data)])
 names(z_score_list) = names(data[,3:ncol(data)])
