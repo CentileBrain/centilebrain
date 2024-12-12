@@ -26,14 +26,14 @@ library(reticulate)
 
 ### 2. Data Preparation
 
-#### 2.1 Importing the Users' Data
+#### 2.1 Importing Users' Data
 
 Download template [**(template_subcortical-volume-male.csv)**](https://github.com/CentileBrain/centilebrain/blob/main/models_without_globalMeasures/templates/template_subcortical-volume-male.csv) and populate this template with your own data. The CentileBrain models will not function if there are missing data on the input spreadsheet. Users can either remove study participants with missing data or impute the missing data. 
 ```{r}
 data_original <- read.csv(".../template_subcortical-volume-male.csv")
 ```
 
-#### 2.2 Site Harmonization of the Users' Data
+#### 2.2 Site Harmonization of Users' Data
 
 Download and read the [**Python script of ComBat-GAM**](https://github.com/CentileBrain/centilebrain/blob/3ffe05cfd2b52591662c8648a2079c363f079f32/models/combatGAM_Python4R.py) within the R environment.
 ```{r message=FALSE, warning=FALSE, results=FALSE}
@@ -54,7 +54,7 @@ data[,c(3:16)] = data_harmonized # change '3:16' to '3:70' for cortical thicknes
 names(data) <- colnames(data_original)
 ```
 
-### 3. Application of CentileBrain Model Parameters to the Users' Data
+### 3. Application of CentileBrain Model Parameters to Users' Data
 
 #### 3.1 Loading the pre-trained CentileBrain model (note this version of the model is excluding the global measures as covariates) 
 
