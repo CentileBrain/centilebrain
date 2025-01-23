@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 np.random.seed(0)
 
+# modify the following lines to comment or uncomment them as needed for different morphometric variables
 data = pd.read_csv('data_template_CorticalThickness.csv')
 # data = pd.read_csv('data_template_SubcorticalVolume.csv')
 # data = pd.read_csv('data_template_SurfaceArea.csv')
