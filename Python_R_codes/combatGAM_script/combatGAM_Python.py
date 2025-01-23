@@ -8,7 +8,10 @@ import pandas as pd
 import numpy as np
 np.random.seed(0)
 
-data = pd.read_csv('data.csv')
+data = pd.read_csv('data_template_CorticalThickness.csv')
+# data = pd.read_csv('data_template_SubcorticalVolume.csv')
+# data = pd.read_csv('data_template_SurfaceArea.csv')
+
 my_data = np.array(data)
-my_covars = pd.read_csv('covars.csv')
+my_covars = pd.read_csv('covars_template.csv')
 my_model, my_data_adj = harmonizationLearn(my_data, my_covars, smooth_terms=['age'])
