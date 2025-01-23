@@ -18,8 +18,3 @@ def combatGAM_Python4R_function(path):
     return my_data_adj, my_model
 
 
-# In[ ]:
-
-
-
-
