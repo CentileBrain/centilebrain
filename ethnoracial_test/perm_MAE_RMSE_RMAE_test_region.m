@@ -32,7 +32,7 @@ end
 n_CentileBrain = numel(err_CentileBrain);
 n_test  = numel(err_test);
 
-%% MAE
+%% MAE %%
 % ---- Observed difference ----
 err_test = real_test - pred_test;
 err_CentileBrain = real_CentileBrain - pred_CentileBrain;
@@ -53,7 +53,7 @@ end
 p_value_MAE_2sides = (1 + sum(abs(D_perm_MAE) >= abs(D_obs_MAE))) / (1 + n_perm);
 
 
-%% RMAE
+%% RMAE %%
 % ---- Observed difference ----
 err_test = (real_test - pred_test)./real_test;
 err_CentileBrain = (real_CentileBrain - pred_CentileBrain)./real_CentileBrain;
@@ -74,7 +74,7 @@ end
 p_value_RMAE_2sides = (1 + sum(abs(D_perm_RMAE) >= abs(D_obs_RMAE))) / (1 + n_perm);
 
 
-%% RMSE
+%% RMSE %%
 % Compute subject-level squared errors
 se_CentileBrain = (err_CentileBrain).^2;
 se_test  = (err_test).^2;
@@ -93,4 +93,5 @@ for p = 1:n_perm
 end
 % ---- Two-sided p-value ----
 p_value_RMSE_2sides = (1 + sum(abs(D_perm_RMSE) >= abs(D_obs_RMSE))) / (1 + n_perm);
+
 
