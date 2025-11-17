@@ -2,7 +2,7 @@ function [p_value_MAE_2sides, D_obs_MAE, D_perm_MAE, ci_MAE, p_value_RMAE_2sides
     p_value_RMSE_2sides, D_obs_RMSE, D_perm_RMSE, ci_RMSE] = perm_MAE_RMSE_RMAE_test_region(real_test, pred_test, ...
     real_CentileBrain, pred_CentileBrain, n_perm)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Permutation test for difference in MAE between training and test samples
+% Permutation test for difference in MAE between training (CentileBrain) and test samples
 % (run per region)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Permutation test comparing MAE between training and test samples
@@ -93,5 +93,6 @@ for p = 1:n_perm
 end
 % ---- Two-sided p-value ----
 p_value_RMSE_2sides = (1 + sum(abs(D_perm_RMSE) >= abs(D_obs_RMSE))) / (1 + n_perm);
+
 
 
