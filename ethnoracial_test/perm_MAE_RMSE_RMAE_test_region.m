@@ -8,10 +8,10 @@ function [p_value_MAE_2sides, D_obs_MAE, D_perm_MAE, ci_MAE, p_value_RMAE_2sides
 % Permutation test comparing MAE between training and test samples
 % ---------------------------------------------------------------
 % Inputs:
-%   real_test : vector of values of test sample
-%   pred_test  : vector of predicted values of test sample
-%   real_CentileBrain : vector of values of CentileBrain sample
-%   pred_CentileBrain  : vector of predicted values of CentileBrain sample
+%   real_test : vector of values of test sample, subject level
+%   pred_test  : vector of predicted values of test sample, subject level
+%   real_CentileBrain : vector of values of CentileBrain sample, subject level
+%   pred_CentileBrain  : vector of predicted values of CentileBrain sample, subject level
 %   n_perm    : number of permutations (e.g., 5000)
 % Outputs:
 %   p_value_MAE_2sides   : two-sided permutation p-value of MAE
@@ -93,6 +93,7 @@ for p = 1:n_perm
 end
 % ---- Two-sided p-value ----
 p_value_RMSE_2sides = (1 + sum(abs(D_perm_RMSE) >= abs(D_obs_RMSE))) / (1 + n_perm);
+
 
 
 
