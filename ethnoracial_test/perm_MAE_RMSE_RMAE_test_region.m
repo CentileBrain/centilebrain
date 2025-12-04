@@ -25,7 +25,7 @@ function [p_value_MAE_2sides, D_obs_MAE, D_perm_MAE, ci_MAE, p_value_RMAE_2sides
 %   D_perm_RMSE    : permutation distribution of RMSE
 
 
-if nargin < 3
+if nargin < 5
     n_perm = 5000;
 end
 
@@ -93,6 +93,7 @@ for p = 1:n_perm
 end
 % ---- Two-sided p-value ----
 p_value_RMSE_2sides = (1 + sum(abs(D_perm_RMSE) >= abs(D_obs_RMSE))) / (1 + n_perm);
+
 
 
 
